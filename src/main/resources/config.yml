@@ -1,0 +1,205 @@
+# kkfish Stardew Valley Style Fishing Plugin Configuration
+# bStats metrics collection
+bstats:
+  enabled: true
+
+world-whitelist:
+  enabled: true
+  worlds:
+    - "spawn"
+    - "world"
+    - "world_nether"
+    - "world_the_end"
+
+# 指令切换钓鱼模式设置
+mode-switch:
+  # 是否允许玩家使用指令切换原版/插件钓鱼模式
+  allow-command-switch: true
+  # 原版钓鱼模式设置
+  vanilla-mode:
+    # 原版钓鱼是否给自定义鱼类（true=给插件自定义鱼，false=给原版鱼类）
+    give-custom-fish: true
+
+fishing-settings:
+  max-charge-time: 1000
+  cast-cooldown: 5000
+  base-bite-chance: 0.2
+  max-bite-chance: 1.0
+  bite-check-delay-min: 5000
+  bite-check-delay-max: 15000
+  bite-hint-timeout: 2
+  minigame-duration: 10000
+  initial-progress: 10
+  
+  progress-bar:
+    increase-speed: 0.015
+    decrease-speed: 0.01
+    
+    rarity-impact:
+      enabled: true
+      slowdown-per-rarity-level: 0.15
+      min-increase-speed-ratio: 0.45
+    
+    styles:
+      default:
+        progress-char: "█"
+        empty-char: "░"
+        progress-color: "&a"
+        empty-color: "&7"
+  
+  rarity:
+    multipliers:
+      legendary: 2.0
+      epic: 1.5
+      rare: 1.2
+      common: 1
+    weights:
+      legendary: 2
+      epic: 8
+      rare: 15
+      common: 50
+
+  enable-vanilla-exp: true
+  vanilla-exp-multiplier: 1.0
+  disable-vanilla-fishing: false
+
+  durability:
+    max-single-loss: 5
+    base-loss: 1
+
+debug:
+  enabled: false
+
+visual-effects:
+  enabled: true
+
+language:
+  current: "en_us"
+  supported: ["zh_cn", "en_us"]
+
+seasonal:
+  enabled: true
+  
+  price-fluctuation:
+    enabled: true
+    spring: 0.1
+    summer: 0.2
+    autumn: -0.1
+    winter: -0.2
+    base: 0.05
+
+update-check:
+  enabled: true
+
+# Economy System Settings
+economy:
+  # Master switch for economy-related features (sell, sellgui, hook)
+  enabled: true
+  # Enable/disable economy system (for currency transactions)
+  economy: true
+  # Enable/disable sell feature
+  sell: true
+  # Enable/disable sell GUI feature
+  sellgui: true
+
+# Database Settings - Supported types: sqlite (default), mysql
+database:
+  type: "sqlite"
+  
+  sqlite:
+    file: "data.db"
+  
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "kkfish"
+    username: "root"
+    password: "password"
+    table-prefix: "kkfish_"
+    pool-size: 5
+    use-ssl: false
+    timeout: 30000
+
+# Item Templates Configuration
+item-templates:
+  fish-templates:
+    default:
+      content: |-
+        &6┏━━━━━━━ 🐟 FISH DETAILS 🐟 ━━━━━━━┓
+        &b┃ Name: &f%name%
+        &a┃ Size: &f%size%&a cm
+        &c┃ Value: &f%value%&c coins
+        &d┃ Rarity: &f%rarity%
+        &6┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+        &d✨ Special Effects:
+        &7➤ %effects%
+        &7
+    simple:
+      content: |-
+        &b🐠 Name: %name%
+        &a📏 Size: %size% cm
+        &c💰 Value: %value% coins
+        &d💎 Rarity: %rarity%
+        &d✨ Special Effects:
+        &7➤ %effects%
+  
+  rod-templates:
+    default:
+      content: |-
+        &6┏━━━━━━━ 🎣 ROD PROPERTIES 🎣 ━━━━━━━┓
+        &b┃ Difficulty: &f%difficulty%
+        &a┃ Float Area: &f%float_area%
+        &c┃ Durability: &f%durability%
+        &d┃ Charge Speed: &f%charge_speed%
+        &5┃ Bite Rate Bonus: &f%bite_rate_bonus%
+        &6┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+        &e✨ Special Effects:
+        &7➤ %effects%
+        &7🎣 Happy Fishing!
+    compact:
+      content: |-
+        &b🎣 Core Rod Properties:
+        &b├─ Difficulty: %difficulty% | Float Range: %float_area%
+        &c├─ Durability: %durability%
+        &d└─ Charge Speed: %charge_speed% | Bite Bonus: %bite_rate_bonus%
+        &e✨ Special Effects: %effects%
+  
+  hook-templates:
+    default:
+      content: |-
+        &6┏━━━━━━━ 🪝 HOOK INFO 🪝 ━━━━━━━┓
+        &7┃ Level: &f%level%
+        %rarity_color%┃ Rarity: &f%rarity_name%
+        &7┃ Description: &f%description%
+        &6┠━━━━━━━ 📊 PERFORMANCE 📊 ━━━━━━━┨
+        &7┃ %performance_metrics%
+        &6┠━━━━━━━ 📋 STATUS 📋 ━━━━━━━┨
+        &7┃ %status_info%
+        &6┠━━━━━━━ ⚙️ EQUIPMENT ⚙️ ━━━━━━━┨
+        &7┃ %equipment_info%
+        &6┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+    simple:
+      content: |-
+        &7🪝 %rarity_color%%rarity_name%&7 | Level: %level%
+        &7📝 %description%
+        &7📊 Performance: %performance_metrics%
+        &7📋 Status: %status_info%
+        &7⚙️ Equipment: %equipment_info%
+  
+  bait-templates:
+    default:
+      content: |-
+        &6┏━━━━━━━ 🦐 BAIT DETAILS 🦐 ━━━━━━━┓
+        &b┃ Name: &f%name%
+        &7┃ Description: &f%description%
+        &6┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+        &d✨ Bait Effects:
+        &7➤ %effects%
+        &7
+    compact:
+      content: |-
+        &b🦐 Name: %name%
+        &7📝 Description: %description%
+        &d✨ Effects:
+        &7➤ %effects%
+
