@@ -238,14 +238,14 @@ public class Fish {
         config.debugLog("activeProgressTasks大小: " + activeProgressTasks.size());
         
         try {
-            progressTask.runTaskTimer(plugin, 0, 1);
+            progressTask.runTaskTimer(plugin, 0, 3);
             config.debugLog("BukkitRunnable.runTaskTimer调用成功");
         } catch (Exception e) {
             config.debugLog("BukkitRunnable.runTaskTimer调用失败: " + e.getMessage());
             
             try {
                 config.debugLog("尝试使用Bukkit.getScheduler().runTaskTimer()");
-                Bukkit.getScheduler().runTaskTimer(plugin, progressTask, 0, 1);
+                Bukkit.getScheduler().runTaskTimer(plugin, progressTask, 0, 3);
                 config.debugLog("Bukkit.getScheduler().runTaskTimer调用成功");
             } catch (Exception ex) {
                 config.debugLog("Bukkit.getScheduler().runTaskTimer调用失败: " + ex.getMessage());
@@ -255,7 +255,7 @@ public class Fish {
                 config.debugLog("直接执行一次蓄力进度任务");
                 progressTask.run();
                 
-                runContinuousTask(progressTask, 1);
+                runContinuousTask(progressTask, 3);
             }
         }
     }
